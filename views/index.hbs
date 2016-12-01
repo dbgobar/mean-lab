@@ -1,0 +1,13 @@
+<h1>IceCream!</h1>
+<h3> Add a Flavor!!</h3>
+<form action="/" method="post">
+  <!-- <label for=""></label> -->
+  <input id="" type="text" name="sundae[flavor]" placeholder="Flavor"></br>
+  <input id="" type="text" name="sundae[ingredients]" placeholder="Ingredient"></br>
+  <input id="" type="text" name="sundae[photo]" placeholder="Photo Url"></br>
+  <input type="submit">
+</form>
+
+{{#each sundaes as |sundae|}}
+  <h3><a href="/{{sundae.flavor}}">{{sundae.flavor}}</a></h3>
+{{/each}}
