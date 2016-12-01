@@ -1,13 +1,12 @@
 <h1>IceCream!</h1>
 <h3> Add a Flavor!!</h3>
-<form action="/" method="post">
-
-  <input id="" type="text" name="sundae[flavor]" placeholder="Flavor"></br>
-  <input id="" type="text" name="sundae[ingredients]" placeholder="Ingredient"></br>
-  <input id="" type="text" name="sundae[photo]" placeholder="Photo Url"></br>
+<form ng-submit="vm.create()">
+  <input type="text" ng-model="vm.newSundae.flavor" placeholder="Flavor"/>
+  <input type="text" ng-model="vm.newSundae.ingredients" placeholder="Ingredients"/>
+  <input type="text" ng-model="vm.newSundae.photo" placeholder="Photo"/>
   <input type="submit">
 </form>
 
-{{#each sundaes as |sundae|}}
-  <h3><a href="/{{sundae.flavor}}">{{sundae.flavor}}</a></h3>
-{{/each}}
+<h2 data-ng-repeat="sundae in vm.sundaes">
+  <a data-ui-sref = "show({flavor: sundae.flavor})">{{sundae.flavor}}<a>
+</h2>

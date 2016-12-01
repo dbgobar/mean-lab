@@ -8,7 +8,7 @@ var Sundae = mongoose.model("Sundae");
 
 // app.use(express.static(__dirname + '/public'))
 // app.use(bodyParser.json()); //handles json post requests
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({ extended: true }));
 app.use("/assets", express.static("public"));
 
 
@@ -23,19 +23,23 @@ app.engine(".hbs", hbs({
 }));
 
 app.get("/", function(req, res){
-  Sundae.find({}).then(sundaes => {
-    res.render("index", {sundaes})
+        res.render("sundaes");
+})
+
+app.get("/api/", function(req, res){
+  Sundae.find({}).then(function(sundaes){
+      res.json(sundaes);
   })
 })
 
-app.get("/:flavor", function(req,res){
+app.get("/api/:flavor", function(req,res){
   Sundae.findOne({flavor: req.params.flavor}).then(sundae => {
-    res.render("show", {sundae});
+    res.json(sundae);
   })
 })
 
-app.post("/", function(req, res){
-  Sundae.create(req.body.sundae).then(sundae =>{
+app.post("/api/", function(req, res){
+  Sundae.create(req.body).then(sundae =>{
     res.redirect("/");
   })
 })
